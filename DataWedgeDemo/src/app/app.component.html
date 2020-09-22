@@ -1,0 +1,52 @@
+<div fxLayout="column" fxFlexFill>
+  <mat-toolbar fxFlex="0 0 auto" color="primary">
+    <mat-toolbar-row>
+      <span>{{ title }}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div fxFlex class="flex-container">
+    <div fxLayout="column" fxLayoutGap="8px" fxLayoutAlign="space-around" fxFill>
+      <div fxFlex="10%" style="text-align: center;">
+        <button fxFlex mat-raised-button color="accent" (click)="keyboardEventsLog = []; $event.currentTarget.blur()">Clear</button>
+      </div>
+      <div fxFlex="70%" style="overflow-y: scroll;">
+        <div *ngIf="keyboardEventsLog.length" fxflex>
+          <div *ngFor="let event of keyboardEventsLog">
+            <div fxLayout="column">
+              <div fxFlex>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <p matLine>key: {{event.key}}</p>
+                  <p matLine>which: {{event.which}}</p>
+                </div>
+              </div>
+              <div fxFlex>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <p matLine>keyCode: {{event.keyCode}}</p>
+                  <p matLine>code: {{event.code}}</p>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex>
+        <mat-card>
+          <mat-card-content>
+            <mat-form-field fxFlex style="margin-bottom: -1.25em;">
+              <input fxFlex matInput
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="Barcode #"
+              name="barcode"
+              [(ngModel)]="barcode"
+              (focus)="inputIsFocused = !inputIsFocused"
+              (blur)="inputIsFocused = !inputIsFocused"
+              #barcodeInput>
+              </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
